@@ -3,6 +3,7 @@ from dynamodb_mapper.model import DynamoDBModel, ConnectionBorg
 class studentDB(DynamoDBModel):
     __table__ = u"studentDB"
     __hash_key__ = u"studentid"
+    __range_key__= u"email"
     __schema__ = {
         u"studentid": int,
         u"fname": str,
@@ -14,8 +15,9 @@ class studentDB(DynamoDBModel):
     }
 
 # connection = ConnectionBorg()
+# # connection.get_table("studentDB").delete()
 # connection.create_table(studentDB, 10, 10, wait_for_active=True)
-
+# studentDB.delete()
 
 
 # exampledb = studentDB()

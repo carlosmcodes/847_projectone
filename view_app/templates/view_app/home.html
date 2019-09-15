@@ -68,11 +68,11 @@
         </h5>
       </div>
       <hr class="m-4" />
+      <br/>
       <div class="row">
         <table
           class="table table-striped"
-          id="student_table"
-          style="display: none"
+          id="postsearch_table"
         >
           <thead>
             <tr>
@@ -85,19 +85,47 @@
             </tr>
           </thead>
           <tbody>
-            {%for values in database%}
             <tr>
-              <th scope="row">{{ values.studentid }}</th>
-              <td>{{ values.fname }}</td>
-              <td>{{ values.lname }}</td>
-              <td>{{ values.email }}</td>
-              <td>{{ values.address }}</td>
-              <td>{{ values.gpa }}</td>
+              <th scope="row">{{ postsearch.studentid }}</th>
+              <td>{{ postsearch.fname }}</td>
+              <td>{{ postsearch.lname }}</td>
+              <td>{{ postsearch.email }}</td>
+              <td>{{ postsearch.address }}</td>
+              <td>{{ postsearch.gpa }}</td>
             </tr>
-            {%endfor%}
           </tbody>
         </table>
       </div>
+      <div class="row">
+          <table
+            class="table table-striped"
+            id="student_table"
+            style="display: none"
+          >
+            <thead>
+              <tr>
+                <th scope="col">StudentID</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+                <th scope="col">GPA</th>
+              </tr>
+            </thead>
+            <tbody>
+              {%for values in database%}
+              <tr>
+                <th scope="row">{{ values.studentid }}</th>
+                <td>{{ values.fname }}</td>
+                <td>{{ values.lname }}</td>
+                <td>{{ values.email }}</td>
+                <td>{{ values.address }}</td>
+                <td>{{ values.gpa }}</td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
       <form
         class="needs-validation"
         novalidate=""
@@ -261,7 +289,7 @@
             style="text-align: center; display: none"
             id="display_studentid"
           >
-            <select class="form-control" id="display_studentid_select">
+            <select class="form-control" id="display_studentid_select" name="display_studentid_select">
               <option selected disabled>StudentID</option>
               {%for values in database%}
               <option name="idform">{{ values.studentid }}</option>
@@ -273,7 +301,7 @@
             style="text-align: center; display: none"
             id="display_fname"
           >
-            <select class="form-control" id="display_fname_select">
+            <select class="form-control" id="display_fname_select"  name="display_fname_select" >
               <option selected disabled>First Name</option>
               {%for values in database%}
               <option>{{ values.fname }}</option>
@@ -285,7 +313,7 @@
             style="text-align: center; display: none"
             id="display_lname"
           >
-            <select class="form-control" id="display_lname_select">
+            <select class="form-control" id="display_lname_select" name="display_lname_select">
               <option selected disabled>Last Name</option>
               {%for values in database%}
               <option>{{ values.lname }}</option>
@@ -298,6 +326,8 @@
               type="submit"
               value="OK"
               style="float: center"
+              id="search_okbutton"
+              onclick="display_results()"
             />
           </div>
         </div>
@@ -328,6 +358,7 @@
 
       function hideothers(option_button, item, not_one, not_two) {
         $("#" + option_button).click(function() {
+          document.getElementById('postsearch_table').style.display = "none"
           document.getElementById("bio").style.display = "none";
           resetpicks();
           // if not displayed
@@ -370,9 +401,7 @@
 
       function subcat_change(item) {
         $("#" + item).change(function() {
-          var getText = $("#" + item + " option:selected").text();
-          $(this).submit();
-          return getText;
+          return  $('#' + item).find(":selected").text();
         });
       }
 
@@ -381,6 +410,10 @@
         $("#display_lname_select")[0].selectedIndex = 0;
         $("#display_fname_select")[0].selectedIndex = 0;
         $("#display_studentid_select")[0].selectedIndex = 0;
+      }
+
+      function display_results(){
+        document.getElementById('postsearch_table').style.display = "none"
       }
     </script>
   </body>

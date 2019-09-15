@@ -20,6 +20,20 @@ def addto_Dynamo(studentid, fname, lname, address, email, gpa):
     new_student.gpa = float(gpa)
     new_student.save()
 
+def searchuser(value=0, fname=0, lname=0):
+    refine = list(new_student.scan())
+    if value != 0:
+        returnsearch = list(new_student.query(value))
+        return returnsearch[0]
+    if fname != 0:
+       for i in refine:
+           if fname == i.fname:
+               return i
+    if lname != 0:
+        for i in refine:
+            if lname == i.lname:
+                return i
+
 
 
 
