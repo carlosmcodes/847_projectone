@@ -8,15 +8,23 @@ table = dynamodb.create_table(
     KeySchema =[
         
         {
-        'AttributeName': 'student_id',
+        'AttributeName': 'studentid',
         'KeyType': 'HASH'
+        },
+        {
+        'AttributeName': 'email',
+        'KeyType': 'RANGE'
         },
         
     ],
     AttributeDefinitions = [
         {
-            'AttributeName': 'student_id',
+            'AttributeName': 'studentid',
             'AttributeType': 'N'
+        },
+        {
+            'AttributeName': 'email',
+            'AttributeType': 'S'
         }
     ],
     ProvisionedThroughput = {
@@ -26,3 +34,4 @@ table = dynamodb.create_table(
 )
 # Wait until the table exists.
 table.meta.client.get_waiter('table_exists').wait(TableName = 'student')
+print(f'table status: {table.table_status}')

@@ -1,3 +1,41 @@
-from django.db import models
+from dynamodb_mapper.model import DynamoDBModel, ConnectionBorg
 
-# Create your models here.
+class studentDB(DynamoDBModel):
+    __table__ = u"studentDB"
+    __hash_key__ = u"studentid"
+    __schema__ = {
+        u"studentid": int,
+        u"fname": str,
+        u"lname": str,
+        u"email": str,
+        u"address": str,
+        u"gpa": float,
+        
+    }
+
+# connection = ConnectionBorg()
+# connection.create_table(studentDB, 10, 10, wait_for_active=True)
+
+
+
+# exampledb = studentDB()
+# exampledb.studentid = 968
+# exampledb.fname = 'mackenzie'
+# exampledb.lname = 'hoeckley'
+# exampledb.email = 'mackenz@yahoo.com'
+# exampledb.gpa = 3.96
+# exampledb.address = '2 laurel lane'
+# exampledb.save()
+
+# response = exampledb.scan()
+
+# how to print generator
+# for values in response:
+#     print (f'generated:{values.studentid}')
+
+# dblist = list(response)
+# for i in dblist:
+#     print(f'list: {i.studentid}')
+
+# for i in dblist:
+#     print(f'list: {i.studentid}')
