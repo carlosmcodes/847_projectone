@@ -11,15 +11,15 @@ def home(request):
 
     if request.GET.get("display_studentid_select"):
         postsearch = searchuser(value=int(request.GET.get("display_studentid_select")))
-        return render(request, 'view_app/home.html', {'postsearch': postsearch })
+        return render(request, 'view_app/index.html', {'postsearch': postsearch })
 
     elif request.GET.get("display_fname_select"):
         postsearch = searchuser(fname=request.GET.get("display_fname_select"))
-        return render(request, 'view_app/home.html', {'postsearch': postsearch })
+        return render(request, 'view_app/index.html', {'postsearch': postsearch })
     
     elif request.GET.get("display_lname_select"):
         postsearch = searchuser(lname=request.GET.get("display_lname_select"))
-        return render(request, 'view_app/home.html', {'postsearch': postsearch })
+        return render(request, 'view_app/index.html', {'postsearch': postsearch })
     
-    return render(request, 'view_app/home.html', {'database': db})
+    return render(request, 'view_app/index.html', {'database': db})
     
